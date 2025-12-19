@@ -6,7 +6,6 @@
 
 **Fecha:** Diciembre 2025
 
-<br/>
 
 ---
 
@@ -68,6 +67,7 @@ En la máquina víctima (Ubuntu), comprobamos que el ataque ha tenido éxito.
 ip a
 ```
 Al ejecutar `ip a`, observamos que la interfaz ha recibido automáticamente una dirección global del rango `2001:1234...` mediante SLAAC.
+
 <img width="425" height="299" alt="image" src="https://github.com/user-attachments/assets/e7f64fe9-3bc5-42ba-8286-b822a8e1e150" />
 
 <br/>
