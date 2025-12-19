@@ -108,11 +108,13 @@ firefox "http://[2001:1234::1]/login?usuario=admin&pass=capturado"
 
 ### Resultado Exitoso.
 Como se observa en la siguiente captura, el servidor del atacante intercepta la petición completa, revelando el usuario y la contraseña en texto plano en los logs:
+
 <img width="425" height="72" alt="image" src="https://github.com/user-attachments/assets/60f1dcd7-e308-4275-965b-f7f7e4157489" />
 
 <br/>
 
 Adicionalmente, Wireshark confirma la captura del paquete HTTP GET con los datos sensibles:
+
 <img width="425" height="213" alt="image" src="https://github.com/user-attachments/assets/1a139250-41eb-4351-a33d-90f57876f56c" />
 
 <br/>
