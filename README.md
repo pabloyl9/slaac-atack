@@ -91,7 +91,6 @@ En nuestra máquina Atacante (Kali) podemos también dejar Wireshark funcionando
 ```bash
 sudo wireshark -i eth0 -k -Y http
 ```
-<br/>
 
 ### Paso 3: Simulación de envío de credenciales.
 En la Víctima (Ubuntu): Simulamos el envío de credenciales mediante una petición HTTP:
